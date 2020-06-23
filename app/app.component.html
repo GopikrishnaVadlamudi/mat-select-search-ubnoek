@@ -7,13 +7,24 @@
     <mat-form-field>
       <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true">
         <mat-select-search [formControl]="bankMultiFilterCtrl"></mat-select-search>
-        <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
+        <!-- <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
           {{bank.name}}
-        </mat-option>
+        </mat-option> -->
+         <mat-optgroup *ngFor="let group of filteredBanksMulti | async" [label]="group.name"
+                  [disabled]="group.disabled">
+      <mat-option *ngFor="let pokemon of group.pokemon" [value]="pokemon">
+        {{pokemon.viewValue}}
+      </mat-option>
+    </mat-optgroup>
       </mat-select>
     </mat-form-field>
   </p>
- 
+  <p>
+    Selected Banks: 
+  </p>
+  <ul *ngFor="let bank of bankMultiCtrl?.value">
+    <li>{{bank.name}}</li>
+  </ul>
   <span class="version-info">Current build: {{version.full}}</span>
 </div>
 
